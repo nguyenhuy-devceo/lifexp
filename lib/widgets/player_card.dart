@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/player.dart';
 import 'xp_bar.dart';
 
@@ -15,18 +16,37 @@ class PlayerCard extends StatelessWidget {
 
 
 
+  String getRank(){
+
+    if(player.level >= 10){
+      return "🏆 Legend";
+    }
+
+    if(player.level >= 5){
+      return "⚔️ Warrior";
+    }
+
+    if(player.level >= 3){
+      return "🔥 Challenger";
+    }
+
+    return "🌱 Beginner";
+
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
 
 
     return Card(
 
-      elevation: 8,
-
+      elevation: 10,
 
       shape: RoundedRectangleBorder(
 
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(25),
 
       ),
 
@@ -44,7 +64,6 @@ class PlayerCard extends StatelessWidget {
           children: [
 
 
-
             Row(
 
               children: [
@@ -52,11 +71,14 @@ class PlayerCard extends StatelessWidget {
 
                 const CircleAvatar(
 
-                  radius: 30,
+                  radius: 35,
 
                   child: Icon(
+
                     Icons.person,
-                    size: 35,
+
+                    size: 40,
+
                   ),
 
                 ),
@@ -81,7 +103,7 @@ class PlayerCard extends StatelessWidget {
 
                       style: TextStyle(
 
-                        fontSize: 25,
+                        fontSize: 26,
 
                         fontWeight: FontWeight.bold,
 
@@ -102,6 +124,21 @@ class PlayerCard extends StatelessWidget {
                       ),
 
                     ),
+
+
+
+                    Text(
+
+                      getRank(),
+
+                      style: const TextStyle(
+
+                        fontSize: 16,
+
+                      ),
+
+                    ),
+
 
 
                   ],
@@ -127,64 +164,37 @@ class PlayerCard extends StatelessWidget {
               children: [
 
 
+                stat(
 
-                Column(
+                  "❤️",
 
-                  children: [
-
-
-                    const Text(
-                      "❤️",
-                      style: TextStyle(
-                        fontSize: 25,
-                      ),
-                    ),
-
-
-                    Text(
-                      "${player.hp}",
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-
-                  ],
+                  "${player.hp}",
 
                 ),
 
 
 
-                Column(
+                stat(
 
-                  children: [
+                  "🪙",
 
-
-                    const Text(
-                      "💰",
-                      style: TextStyle(
-                        fontSize: 25,
-                      ),
-                    ),
-
-
-                    Text(
-                      "${player.coin}",
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-
-                  ],
+                  "${player.coin}",
 
                 ),
 
+
+
+                stat(
+
+                  "⚡",
+
+                  "${player.xp}/${player.maxXp}",
+
+                ),
 
 
               ],
+
 
             ),
 
@@ -206,6 +216,7 @@ class PlayerCard extends StatelessWidget {
 
           ],
 
+
         ),
 
       ),
@@ -214,5 +225,52 @@ class PlayerCard extends StatelessWidget {
 
 
   }
+
+
+
+  Widget stat(String icon, String value){
+
+
+    return Column(
+
+      children: [
+
+
+        Text(
+
+          icon,
+
+          style: const TextStyle(
+
+            fontSize: 25,
+
+          ),
+
+        ),
+
+
+
+        Text(
+
+          value,
+
+          style: const TextStyle(
+
+            fontSize: 18,
+
+            fontWeight: FontWeight.bold,
+
+          ),
+
+        ),
+
+
+      ],
+
+    );
+
+
+  }
+
 
 }
