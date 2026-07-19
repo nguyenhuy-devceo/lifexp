@@ -74,7 +74,7 @@ class StorageService {
 
     for (int i = 0; i < quests.length && i < list.length; i++) {
 
-      quests[i].completed = list[i]["completed"];
+      quests[i].completed = list[i]["completed"] ?? false;
 
     }
 
