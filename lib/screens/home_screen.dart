@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     player = await StorageService.loadPlayer();
 
     await StorageService.loadQuest(quests);
-
+    await StorageService.loadAchievement(achievements);
     completedQuest =
         quests.where((q) => q.completed).length;
 
@@ -100,18 +100,24 @@ class _HomeScreenState extends State<HomeScreen> {
       }
 
       while (player.xp >= player.maxXp) {
-        player.level++;
-        player.xp -= player.maxXp;
-        player.maxXp += 100;
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              "🎉 LEVEL UP! Level ${player.level}",
-            ),
-          ),
-        );
-      }
+  player.level++;
+
+  player.xp -= player.maxXp;
+
+  // mỗi level sau cần thêm 50 XP
+  player.maxXp += 50;
+
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        "🎉 LEVEL UP! Level ${player.level}",
+      ),
+    ),
+  );
+
+}
 
       achievements[0].unlocked = completedQuest >= 1;
       achievements[1].unlocked = completedQuest >= 10;
@@ -121,6 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await StorageService.saveGame(
       player,
       quests,
+      achievements,
     );
   }
     @override

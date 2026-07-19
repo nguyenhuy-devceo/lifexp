@@ -11,7 +11,7 @@ class Player {
 
     this.level = 1,
     this.xp = 0,
-    this.maxXp = 100,
+    this.maxXp = 50,
     this.hp = 100,
     this.coin = 0,
 
